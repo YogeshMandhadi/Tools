@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Converter - Text Case Transformation Tool</title>
+    <meta name="description" content="Convert text to UPPERCASE, lowercase, Title Case, Sentence case, and more. Free online text case converter tool.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h1 class="h3 mb-0"><i class="fas fa-font me-2"></i>Case Converter</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="text-input" class="form-label">Enter or paste your text below:</label>
+                            <textarea class="form-control mb-3" id="text-input" rows="8" placeholder="Type or paste your text here..."></textarea>
+                            
+                            <div class="d-grid gap-2">
+                                <div class="row g-2">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary w-100" id="uppercase-btn">
+                                            <i class="fas fa-arrow-up me-2"></i>UPPERCASE
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary w-100" id="lowercase-btn">
+                                            <i class="fas fa-arrow-down me-2"></i>lowercase
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary w-100" id="titlecase-btn">
+                                            <i class="fas fa-heading me-2"></i>Title Case
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary w-100" id="sentencecase-btn">
+                                            <i class="fas fa-align-left me-2"></i>Sentence case
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary w-100" id="alternatingcase-btn">
+                                            <i class="fas fa-random me-2"></i>aLtErNaTiNg
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary w-100" id="inversecase-btn">
+                                            <i class="fas fa-exchange-alt me-2"></i>Inverse Case
+                                        </button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger" id="clear-btn">
+                                    <i class="fas fa-trash-alt me-2"></i>Clear Text
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2 class="h5 mb-0">About Case Converter Tool</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>This case converter tool allows you to:</p>
+                        <ul>
+                            <li><strong>UPPERCASE:</strong> Convert text to all capital letters</li>
+                            <li><strong>lowercase:</strong> Convert text to all small letters</li>
+                            <li><strong>Title Case:</strong> Capitalize The First Letter Of Each Word</li>
+                            <li><strong>Sentence case:</strong> Capitalize the first letter of each sentence</li>
+                            <li><strong>aLtErNaTiNg cAsE:</strong> Alternate between upper and lower case</li>
+                            <li><strong>Inverse Case:</strong> Invert the case of each character</li>
+                        </ul>
+                        <p>Perfect for formatting text for titles, headings, social media posts, and more.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textInput = document.getElementById('text-input');
+            const clearBtn = document.getElementById('clear-btn');
+            
+            // Case conversion buttons
+            const uppercaseBtn = document.getElementById('uppercase-btn');
+            const lowercaseBtn = document.getElementById('lowercase-btn');
+            const titlecaseBtn = document.getElementById('titlecase-btn');
+            const sentencecaseBtn = document.getElementById('sentencecase-btn');
+            const alternatingcaseBtn = document.getElementById('alternatingcase-btn');
+            const inversecaseBtn = document.getElementById('inversecase-btn');
+
+            // Convert to uppercase
+            uppercaseBtn.addEventListener('click', () => {
+                textInput.value = textInput.value.toUpperCase();
+            });
+
+            // Convert to lowercase
+            lowercaseBtn.addEventListener('click', () => {
+                textInput.value = textInput.value.toLowerCase();
+            });
+
+            // Convert to title case
+            titlecaseBtn.addEventListener('click', () => {
+                textInput.value = textInput.value.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+            });
+
+            // Convert to sentence case
+            sentencecaseBtn.addEventListener('click', () => {
+                textInput.value = textInput.value.toLowerCase()
+                    .replace(/(^\w|\.\s+\w)/g, c => c.toUpperCase());
+            });
+
+            // Convert to alternating case
+            alternatingcaseBtn.addEventListener('click', () => {
+                textInput.value = textInput.value
+                    .split('')
+                    .map((char, i) => i % 2 === 0 ? char.toLowerCase() : char.toUpperCase())
+                    .join('');
+            });
+
+            // Convert to inverse case
+            inversecaseBtn.addEventListener('click', () => {
+                textInput.value = textInput.value
+                    .split('')
+                    .map(char => {
+                        if (char === char.toUpperCase()) {
+                            return char.toLowerCase();
+                        }
+                        return char.toUpperCase();
+                    })
+                    .join('');
+            });
+
+            // Clear text
+            clearBtn.addEventListener('click', () => {
+                textInput.value = '';
+            });
+        });
+    </script>
+</body>
+</html> 

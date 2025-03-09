@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter - Convert Between Length Units</title>
+    <meta name="description" content="Convert between different units of length including meters, kilometers, miles, feet, inches, and more. Free online length converter tool.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h1 class="h3 mb-0"><i class="fas fa-ruler me-2"></i>Length Converter</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="from-value" class="form-label">From:</label>
+                                <input type="number" class="form-control mb-2" id="from-value" placeholder="Enter value">
+                                <select class="form-select" id="from-unit">
+                                    <option value="m">Meters (m)</option>
+                                    <option value="km">Kilometers (km)</option>
+                                    <option value="cm">Centimeters (cm)</option>
+                                    <option value="mm">Millimeters (mm)</option>
+                                    <option value="mi">Miles (mi)</option>
+                                    <option value="yd">Yards (yd)</option>
+                                    <option value="ft">Feet (ft)</option>
+                                    <option value="in">Inches (in)</option>
+                                    <option value="nm">Nautical Miles (nm)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="to-value" class="form-label">To:</label>
+                                <input type="number" class="form-control mb-2" id="to-value" readonly>
+                                <select class="form-select" id="to-unit">
+                                    <option value="km">Kilometers (km)</option>
+                                    <option value="m" selected>Meters (m)</option>
+                                    <option value="cm">Centimeters (cm)</option>
+                                    <option value="mm">Millimeters (mm)</option>
+                                    <option value="mi">Miles (mi)</option>
+                                    <option value="yd">Yards (yd)</option>
+                                    <option value="ft">Feet (ft)</option>
+                                    <option value="in">Inches (in)</option>
+                                    <option value="nm">Nautical Miles (nm)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button class="btn btn-primary" id="swap-btn">
+                                <i class="fas fa-exchange-alt me-2"></i>Swap Units
+                            </button>
+                            <button class="btn btn-danger" id="clear-btn">
+                                <i class="fas fa-trash-alt me-2"></i>Clear
+                            </button>
+                        </div>
+
+                        <!-- Common Conversions -->
+                        <div class="mt-4">
+                            <h5>Common Conversions:</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Example</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="common-conversions">
+                                        <!-- Will be populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2 class="h5 mb-0">About Length Converter</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>This length converter tool allows you to:</p>
+                        <ul>
+                            <li>Convert between metric and imperial units</li>
+                            <li>Support for 9 different length units</li>
+                            <li>Real-time conversion as you type</li>
+                            <li>View common conversion examples</li>
+                            <li>Swap units instantly</li>
+                        </ul>
+                        <p>Perfect for engineering, construction, DIY projects, and everyday measurements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fromValue = document.getElementById('from-value');
+            const toValue = document.getElementById('to-value');
+            const fromUnit = document.getElementById('from-unit');
+            const toUnit = document.getElementById('to-unit');
+            const swapBtn = document.getElementById('swap-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const commonConversions = document.getElementById('common-conversions');
+
+            // Conversion rates to meters (base unit)
+            const conversionRates = {
+                mm: 0.001,
+                cm: 0.01,
+                m: 1,
+                km: 1000,
+                in: 0.0254,
+                ft: 0.3048,
+                yd: 0.9144,
+                mi: 1609.344,
+                nm: 1852
+            };
+
+            // Convert value
+            function convert() {
+                if (!fromValue.value) {
+                    toValue.value = '';
+                    return;
+                }
+
+                const inputValue = parseFloat(fromValue.value);
+                const fromRate = conversionRates[fromUnit.value];
+                const toRate = conversionRates[toUnit.value];
+                
+                // Convert to meters first, then to target unit
+                const meters = inputValue * fromRate;
+                const result = meters / toRate;
+                
+                toValue.value = result.toFixed(6);
+            }
+
+            // Update conversion when input changes
+            fromValue.addEventListener('input', convert);
+            fromUnit.addEventListener('change', convert);
+            toUnit.addEventListener('change', convert);
+
+            // Swap units
+            swapBtn.addEventListener('click', () => {
+                const tempUnit = fromUnit.value;
+                fromUnit.value = toUnit.value;
+                toUnit.value = tempUnit;
+                convert();
+            });
+
+            // Clear inputs
+            clearBtn.addEventListener('click', () => {
+                fromValue.value = '';
+                toValue.value = '';
+            });
+
+            // Populate common conversions
+            const commonExamples = [
+                { from: { value: 1, unit: 'km' }, to: { unit: 'm' } },
+                { from: { value: 1, unit: 'm' }, to: { unit: 'cm' } },
+                { from: { value: 1, unit: 'mi' }, to: { unit: 'km' } },
+                { from: { value: 1, unit: 'ft' }, to: { unit: 'm' } },
+                { from: { value: 1, unit: 'yd' }, to: { unit: 'm' } }
+            ];
+
+            commonExamples.forEach(example => {
+                const fromRate = conversionRates[example.from.unit];
+                const toRate = conversionRates[example.to.unit];
+                const result = (example.from.value * fromRate) / toRate;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${example.from.value} ${example.from.unit}</td>
+                    <td>${result.toFixed(6)} ${example.to.unit}</td>
+                    <td>${example.from.value} ${example.from.unit} = ${result.toFixed(6)} ${example.to.unit}</td>
+                `;
+                commonConversions.appendChild(row);
+            });
+        });
+    </script>
+</body>
+</html> 

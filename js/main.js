@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Load header and footer
-    loadComponent('header-placeholder', 'header.html');
-    loadComponent('footer-placeholder', 'footer.html');
-    
-    // Initialize search functionality
-    initSearch();
-    
-    // Highlight active category in sidebar
-    highlightActiveCategory();
+    // Load header
+    fetch('../../header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+            // Initialize search functionality after header is loaded
+            initializeSearch();
+        })
+        .catch(error => console.error('Error loading header:', error));
+
+    // Load footer
+    fetch('../../footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
 });
 
 /**
@@ -66,90 +74,25 @@ function updateActiveNavItem() {
 /**
  * Initialize search functionality
  */
-function initSearch() {
-    const searchInput = document.getElementById('search-tools');
+function initializeSearch() {
+    const searchInput = document.getElementById('tool-search');
     if (!searchInput) return;
-    
-    searchInput.addEventListener('input', function() {
-        const query = this.value.toLowerCase().trim();
-        filterTools(query);
-    });
-    
-    // Also initialize search in header if available
-    document.addEventListener('headerLoaded', function() {
-        const headerSearchInput = document.querySelector('header .form-control[type="search"]');
-        const headerSearchBtn = document.querySelector('header .btn[type="submit"]');
-        
-        if (headerSearchInput && headerSearchBtn) {
-            headerSearchInput.addEventListener('input', function() {
-                searchInput.value = this.value;
-                filterTools(this.value.toLowerCase().trim());
-            });
-            
-            headerSearchBtn.addEventListener('click', function() {
-                filterTools(headerSearchInput.value.toLowerCase().trim());
-            });
-        }
-    });
-}
 
-/**
- * Filter tools based on search query
- * @param {string} query - The search query
- */
-function filterTools(query) {
-    // Get all tool cards
-    const toolCards = document.querySelectorAll('.tool-card');
-    if (toolCards.length === 0) return;
-    
-    // Track if there are visible tools in each category
-    const categories = {};
-    
-    toolCards.forEach(card => {
-        const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
-        const cardDesc = card.querySelector('.card-text')?.textContent.toLowerCase() || '';
-        const categorySection = card.closest('section');
-        const categoryId = categorySection ? categorySection.id : null;
-        
-        if (!categories[categoryId]) {
-            categories[categoryId] = false;
-        }
-        
-        // Show/hide based on search match
-        if (query === '' || cardTitle.includes(query) || cardDesc.includes(query)) {
-            card.parentElement.style.display = '';
-            categories[categoryId] = true;
-        } else {
-            card.parentElement.style.display = 'none';
-        }
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const toolCards = document.querySelectorAll('.tool-card');
+
+        toolCards.forEach(card => {
+            const toolName = card.querySelector('.card-title').textContent.toLowerCase();
+            const toolDescription = card.querySelector('.card-text').textContent.toLowerCase();
+            
+            if (toolName.includes(searchTerm) || toolDescription.includes(searchTerm)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
     });
-    
-    // Show/hide category sections based on whether they have visible tools
-    for (const categoryId in categories) {
-        const section = document.getElementById(categoryId);
-        if (section) {
-            section.style.display = categories[categoryId] ? '' : 'none';
-        }
-    }
-    
-    // Show a message if no tools match
-    const noResultsElement = document.getElementById('no-results');
-    if (query !== '' && Object.values(categories).every(visible => !visible)) {
-        if (!noResultsElement) {
-            const message = document.createElement('div');
-            message.id = 'no-results';
-            message.className = 'col-12 text-center my-5';
-            message.innerHTML = `
-                <div class="alert alert-info">
-                    <h4>No tools match your search: "${query}"</h4>
-                    <p>Try a different search term or browse categories.</p>
-                </div>
-            `;
-            document.querySelector('#all-tools').appendChild(message);
-        }
-    } else if (noResultsElement) {
-        noResultsElement.remove();
-    }
 }
 
 /**

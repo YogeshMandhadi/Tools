@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Counter - Multi-Tools</title>
-    <meta name="description" content="Count words, characters, sentences, and paragraphs in your text with this free online word counter tool.">
+    <title>Word Counter - Online Text Analysis Tool</title>
+    <meta name="description" content="Free online word counter tool. Count words, characters, sentences, and paragraphs in your text instantly.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -13,117 +13,82 @@
     <!-- Header will be loaded dynamically -->
     <div id="header-placeholder"></div>
 
-    <div class="container mt-4">
-        <div class="tool-container">
-            <div class="tool-header">
-                <h1>Word Counter</h1>
-                <p class="tool-description">Count words, characters, sentences, paragraphs, and reading time in your text.</p>
-            </div>
-            
-            <div class="tool-content">
-                <!-- Text input area -->
-                <div class="form-group mb-4">
-                    <label for="text-input" class="form-label fw-bold">Enter or paste your text below:</label>
-                    <textarea id="text-input" class="form-control" rows="10" placeholder="Type or paste your text here..."></textarea>
-                </div>
-                
-                <!-- Action buttons -->
-                <div class="d-flex gap-2 mb-4">
-                    <button id="copy-btn" class="btn btn-primary">
-                        <i class="fas fa-copy me-1"></i> Copy Text
-                    </button>
-                    <button id="clear-btn" class="btn btn-outline-danger">
-                        <i class="fas fa-trash-alt me-1"></i> Clear
-                    </button>
-                    <button id="sample-btn" class="btn btn-outline-secondary">
-                        <i class="fas fa-file-alt me-1"></i> Sample Text
-                    </button>
-                </div>
-                
-                <!-- Stats cards -->
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
-                    <div class="col">
-                        <div class="card h-100 text-center">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-font me-2"></i>Words</h5>
-                                <p id="word-count" class="display-4 mb-0">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100 text-center">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-text-width me-2"></i>Characters</h5>
-                                <p id="char-count" class="display-4 mb-0">0</p>
-                                <p id="char-count-no-spaces" class="text-muted mb-0">(0 without spaces)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100 text-center">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-align-left me-2"></i>Sentences</h5>
-                                <p id="sentence-count" class="display-4 mb-0">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100 text-center">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-align-justify me-2"></i>Paragraphs</h5>
-                                <p id="paragraph-count" class="display-4 mb-0">0</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Additional stats -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="mb-0">Additional Statistics</h5>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h1 class="h3 mb-0"><i class="fas fa-calculator me-2"></i>Word Counter</h1>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Reading Time (avg. 200 wpm)
-                                        <span id="reading-time" class="badge bg-primary rounded-pill">0 min</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Speaking Time (avg. 130 wpm)
-                                        <span id="speaking-time" class="badge bg-primary rounded-pill">0 min</span>
-                                    </li>
-                                </ul>
+                        <div class="mb-4">
+                            <label for="text-input" class="form-label">Enter or paste your text below:</label>
+                            <textarea class="form-control" id="text-input" rows="10" placeholder="Type or paste your text here..."></textarea>
+                        </div>
+
+                        <div class="row text-center stats">
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Words</h5>
+                                        <p class="card-text" id="word-count">0</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Longest Word
-                                        <span id="longest-word" class="badge bg-secondary rounded-pill">-</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Most Common Word
-                                        <span id="common-word" class="badge bg-secondary rounded-pill">-</span>
-                                    </li>
-                                </ul>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Characters</h5>
+                                        <p class="card-text" id="char-count">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Sentences</h5>
+                                        <p class="card-text" id="sentence-count">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Paragraphs</h5>
+                                        <p class="card-text" id="paragraph-count">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-danger" id="clear-text">
+                                        <i class="fas fa-trash-alt me-2"></i>Clear Text
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Ad space -->
-            <div class="ad-placeholder my-4">
-                <p>Advertisement Space</p>
-            </div>
-        </div>
-        
-        <!-- Related tools section -->
-        <div class="related-tools">
-            <h3>Related Text Tools</h3>
-            <div class="row row-cols-1 row-cols-md-3 g-4" id="related-tools-container">
-                <!-- Related tools will be populated dynamically -->
+
+                <!-- Additional Information -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2 class="h5 mb-0">About Word Counter Tool</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>This word counter tool helps you count:</p>
+                        <ul>
+                            <li>Total number of words in your text</li>
+                            <li>Character count (with and without spaces)</li>
+                            <li>Number of sentences</li>
+                            <li>Number of paragraphs</li>
+                        </ul>
+                        <p>Perfect for essays, articles, assignments, and social media posts where character or word limits apply.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -135,158 +100,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../../js/main.js"></script>
-    <script src="../../js/tools.js"></script>
-    
-    <!-- Tool-specific script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Get DOM elements
             const textInput = document.getElementById('text-input');
             const wordCount = document.getElementById('word-count');
             const charCount = document.getElementById('char-count');
-            const charCountNoSpaces = document.getElementById('char-count-no-spaces');
             const sentenceCount = document.getElementById('sentence-count');
             const paragraphCount = document.getElementById('paragraph-count');
-            const readingTime = document.getElementById('reading-time');
-            const speakingTime = document.getElementById('speaking-time');
-            const longestWord = document.getElementById('longest-word');
-            const commonWord = document.getElementById('common-word');
-            const copyBtn = document.getElementById('copy-btn');
-            const clearBtn = document.getElementById('clear-btn');
-            const sampleBtn = document.getElementById('sample-btn');
-            const relatedToolsContainer = document.getElementById('related-tools-container');
-            
-            // Event listeners
-            textInput.addEventListener('input', updateCounts);
-            copyBtn.addEventListener('click', copyText);
-            clearBtn.addEventListener('click', clearText);
-            sampleBtn.addEventListener('click', insertSampleText);
-            
-            // Initial count update
-            updateCounts();
-            
-            // Populate related tools
-            populateRelatedTools();
-            
-            // Functions
+            const clearButton = document.getElementById('clear-text');
+
+            function countWords(text) {
+                return text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            }
+
+            function countCharacters(text) {
+                return text.length;
+            }
+
+            function countSentences(text) {
+                return text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(Boolean).length;
+            }
+
+            function countParagraphs(text) {
+                return text.trim() === '' ? 0 : text.split(/\n\s*\n/).filter(Boolean).length;
+            }
+
             function updateCounts() {
                 const text = textInput.value;
-                
-                // Words calculation
-                const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-                wordCount.textContent = words;
-                
-                // Characters calculation
-                const chars = text.length;
-                const charsNoSpaces = text.replace(/\s+/g, '').length;
-                charCount.textContent = chars;
-                charCountNoSpaces.textContent = `(${charsNoSpaces} without spaces)`;
-                
-                // Sentences calculation
-                const sentences = text.trim() ? text.split(/[.!?]+/).filter(Boolean).length : 0;
-                sentenceCount.textContent = sentences;
-                
-                // Paragraphs calculation
-                const paragraphs = text.trim() ? text.split(/\n+/).filter(Boolean).length : 0;
-                paragraphCount.textContent = paragraphs;
-                
-                // Reading time calculation (avg. 200 words per minute)
-                const readingMinutes = Math.ceil(words / 200);
-                readingTime.textContent = readingMinutes === 1 ? '1 min' : `${readingMinutes} mins`;
-                
-                // Speaking time calculation (avg. 130 words per minute)
-                const speakingMinutes = Math.ceil(words / 130);
-                speakingTime.textContent = speakingMinutes === 1 ? '1 min' : `${speakingMinutes} mins`;
-                
-                // Longest word
-                if (words > 0) {
-                    const wordArray = text.trim().split(/\s+/);
-                    const longest = wordArray.reduce((a, b) => a.length > b.length ? a : b);
-                    longestWord.textContent = longest;
-                } else {
-                    longestWord.textContent = '-';
-                }
-                
-                // Most common word
-                if (words > 1) {
-                    const wordFrequency = {};
-                    const wordArray = text.toLowerCase().match(/\b[a-z\d]+\b/g) || [];
-                    
-                    wordArray.forEach(word => {
-                        if (wordFrequency[word]) {
-                            wordFrequency[word]++;
-                        } else {
-                            wordFrequency[word] = 1;
-                        }
-                    });
-                    
-                    let mostCommon = '';
-                    let highestCount = 0;
-                    
-                    for (const word in wordFrequency) {
-                        if (wordFrequency[word] > highestCount) {
-                            mostCommon = word;
-                            highestCount = wordFrequency[word];
-                        }
-                    }
-                    
-                    if (highestCount > 1) {
-                        commonWord.textContent = `${mostCommon} (${highestCount})`;
-                    } else {
-                        commonWord.textContent = 'None';
-                    }
-                } else {
-                    commonWord.textContent = '-';
-                }
+                wordCount.textContent = countWords(text);
+                charCount.textContent = countCharacters(text);
+                sentenceCount.textContent = countSentences(text);
+                paragraphCount.textContent = countParagraphs(text);
             }
-            
-            function copyText() {
-                if (textInput.value) {
-                    navigator.clipboard.writeText(textInput.value)
-                        .then(() => {
-                            copyBtn.innerHTML = '<i class="fas fa-check me-1"></i> Copied!';
-                            copyBtn.classList.remove('btn-primary');
-                            copyBtn.classList.add('btn-success');
-                            
-                            setTimeout(() => {
-                                copyBtn.innerHTML = '<i class="fas fa-copy me-1"></i> Copy Text';
-                                copyBtn.classList.remove('btn-success');
-                                copyBtn.classList.add('btn-primary');
-                            }, 2000);
-                        })
-                        .catch(err => {
-                            console.error('Error copying text: ', err);
-                        });
-                }
-            }
-            
-            function clearText() {
+
+            textInput.addEventListener('input', updateCounts);
+            clearButton.addEventListener('click', function() {
                 textInput.value = '';
                 updateCounts();
-                textInput.focus();
-            }
-            
-            function insertSampleText() {
-                textInput.value = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.`;
-                updateCounts();
-            }
-            
-            function populateRelatedTools() {
-                // Find text tools category
-                const textTools = toolsData.filter(tool => tool.category === 'text-tools' && tool.id !== 'word-counter');
-                
-                // Get random 3 tools
-                const randomTools = textTools.sort(() => 0.5 - Math.random()).slice(0, 3);
-                
-                // Clear container
-                relatedToolsContainer.innerHTML = '';
-                
-                // Add tools
-                randomTools.forEach(tool => {
-                    const toolCard = createToolCard(tool);
-                    relatedToolsContainer.appendChild(toolCard);
-                });
-            }
+            });
         });
     </script>
 </body>
