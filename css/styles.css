@@ -1,8 +1,18 @@
 /* Global Styles */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #3b82f6;
+    --accent-color: #60a5fa;
+    --text-color: #1f2937;
+    --light-bg: #f3f4f6;
+    --border-radius: 1rem;
+    --transition: all 0.3s ease;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    background-color: #f8f9fa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--text-color);
+    background-color: var(--light-bg);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -23,108 +33,149 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 5rem 0;
     color: white;
-    padding: 3rem 0;
-    text-align: center;
-    border-radius: 10px;
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="rgba(255,255,255,0.1)" x="0" y="0" width="100" height="100"/></svg>');
+    opacity: 0.1;
+    transform: rotate(45deg);
 }
 
 .hero-title {
-    font-weight: 700;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
+    font-weight: 800;
     margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.hero-image {
+    transform: perspective(1000px) rotateY(-15deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.hero-image:hover {
+    transform: perspective(1000px) rotateY(-5deg) translateY(-10px);
 }
 
 /* Tool Cards */
 .tool-card {
-    transition: transform 0.2s, box-shadow 0.2s;
-    height: 100%;
     border: none;
-    border-radius: 10px;
-    overflow: hidden;
+    border-radius: var(--border-radius);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    overflow: hidden;
+    background: white;
 }
 
 .tool-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
 }
 
-.tool-card .card-img-top {
-    height: 140px;
-    object-fit: cover;
-    background-color: #f8f9fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.tool-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    transition: var(--transition);
 }
 
-.tool-card .card-img-top i {
-    font-size: 3rem;
-    color: #2575fc;
-}
-
-.tool-card .card-body {
-    padding: 1.25rem;
+.tool-card:hover .tool-icon {
+    transform: scale(1.1);
 }
 
 .tool-card .card-title {
+    color: var(--text-color);
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #0d6efd;
+    margin-bottom: 0.75rem;
 }
 
 .tool-card .card-text {
-    font-size: 0.9rem;
-    color: #6c757d;
-    margin-bottom: 1rem;
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
 }
 
 .tool-card .btn {
-    width: 100%;
-    border-radius: 5px;
+    border-radius: 100px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.tool-card .btn:hover {
+    transform: translateX(5px);
 }
 
 /* Category Sidebar */
 .category-sidebar {
     position: sticky;
-    top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
+    top: 2rem;
+}
+
+.category-sidebar .card {
+    border: none;
+    border-radius: var(--border-radius);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .category-sidebar .card-header {
-    background-color: #2575fc;
+    background: var(--primary-color);
     color: white;
+    padding: 1rem 1.5rem;
     font-weight: 600;
 }
 
 .category-list .nav-link {
-    color: #495057;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f1f1f1;
-    transition: all 0.2s ease;
+    color: var(--text-color);
+    padding: 1rem 1.5rem;
+    border-left: 3px solid transparent;
+    transition: var(--transition);
 }
 
 .category-list .nav-link:hover,
 .category-list .nav-link.active {
-    background-color: #e9ecef;
-    color: #2575fc;
-    border-left: 3px solid #2575fc;
-    padding-left: calc(1rem - 3px);
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+}
+
+.category-list .badge {
+    transition: var(--transition);
+}
+
+.category-list .nav-link:hover .badge {
+    transform: scale(1.1);
 }
 
 /* Section Titles */
 .section-title {
-    position: relative;
-    padding-bottom: 0.75rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    color: #343a40;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
 }
 
 .section-title::after {
@@ -132,29 +183,32 @@ body {
     position: absolute;
     left: 0;
     bottom: 0;
-    height: 3px;
+    height: 4px;
     width: 60px;
-    background-color: #2575fc;
+    background: var(--primary-color);
+    border-radius: 2px;
 }
 
 /* Search Bar */
 .search-container {
-    margin: 2rem auto;
-    max-width: 800px;
+    max-width: 600px;
+    margin-bottom: 2rem;
 }
 
-#search-tools {
-    border-radius: 50px 0 0 50px;
+.search-container .form-control {
+    height: 3.5rem;
+    border-radius: 100px;
     padding-left: 1.5rem;
-    height: 50px;
-    box-shadow: none;
-    border: 1px solid #e9ecef;
+    font-size: 1.1rem;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .search-container .btn {
-    border-radius: 0 50px 50px 0;
-    height: 50px;
+    border-radius: 0 100px 100px 0;
     padding: 0 1.5rem;
+    background: white;
+    color: var(--primary-color);
 }
 
 /* Ad Placeholders */
@@ -286,6 +340,10 @@ footer {
 
 /* Media Queries */
 @media (max-width: 991.98px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
     .category-sidebar {
         position: static;
         margin-bottom: 2rem;
@@ -293,16 +351,20 @@ footer {
 }
 
 @media (max-width: 767.98px) {
-    .tool-card .card-img-top {
-        height: 120px;
+    .hero-section {
+        padding: 3rem 0;
     }
-    
-    .section-title {
-        font-size: 1.5rem;
-    }
-    
+
     .hero-title {
         font-size: 2rem;
+    }
+
+    .search-container .form-control {
+        height: 3rem;
+    }
+
+    .tool-card .card-title {
+        font-size: 1.1rem;
     }
 }
 
@@ -359,7 +421,7 @@ footer {
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    color: #0d6efd;
+    color: var(--primary-color);
 }
 
 /* Header Styles */
@@ -374,4 +436,38 @@ footer {
 
 .social-links a:hover {
     color: #0d6efd !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tool-card {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
 } 

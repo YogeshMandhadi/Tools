@@ -1,38 +1,202 @@
-<footer class="bg-dark text-light py-4 mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-4 mb-md-0">
-                <h5><i class="fas fa-tools me-2"></i>Multi-Tools</h5>
-                <p class="text-muted">Your one-stop destination for all the web tools you'll ever need. 100+ free online tools for everyday use.</p>
-            </div>
-            <div class="col-md-4 mb-4 mb-md-0">
-                <h5>Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#image-tools" class="text-muted">Image Tools</a></li>
-                    <li><a href="#text-tools" class="text-muted">Text Tools</a></li>
-                    <li><a href="#developer-tools" class="text-muted">Developer Tools</a></li>
-                    <li><a href="#calculators" class="text-muted">Calculators</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h5>Connect With Us</h5>
-                <div class="social-links">
-                    <a href="#" class="text-muted me-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-muted me-3"><i class="fab fa-github"></i></a>
-                    <a href="#" class="text-muted"><i class="fab fa-linkedin-in"></i></a>
+<footer class="footer">
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <i class="fas fa-tools me-2"></i>
+                        <span class="fw-bold">Multi</span>Tools
+                    </div>
+                    <p class="footer-description">
+                        Your one-stop destination for all the web tools you'll ever need. 100+ free online tools for everyday use.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Follow us on Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Follow us on Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Follow us on GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Follow us on LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Tools</h5>
+                    <ul class="footer-links">
+                        <li><a href="#image-tools">Image Tools</a></li>
+                        <li><a href="#text-tools">Text Tools</a></li>
+                        <li><a href="#developer-tools">Developer Tools</a></li>
+                        <li><a href="#calculators">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">More Tools</h5>
+                    <ul class="footer-links">
+                        <li><a href="#unit-converters">Unit Converters</a></li>
+                        <li><a href="#security-tools">Security Tools</a></li>
+                        <li><a href="#seo-tools">SEO Tools</a></li>
+                        <li><a href="#misc-tools">More Tools</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <h5 class="footer-title">Newsletter</h5>
+                    <p class="footer-description">Subscribe to our newsletter for updates and new tools.</p>
+                    <form class="footer-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter your email">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <hr class="my-4">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-                <p class="mb-0">&copy; 2024 Multi-Tools. All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <a href="#" class="text-muted me-3">Privacy Policy</a>
-                <a href="#" class="text-muted">Terms of Service</a>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 MultiTools. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                </div>
             </div>
         </div>
     </div>
-</footer> 
+</footer>
+
+<style>
+.footer {
+    background: var(--text-color);
+    color: white;
+    margin-top: auto;
+}
+
+.footer-main {
+    padding: 4rem 0;
+}
+
+.footer-brand {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-brand span {
+    color: var(--accent-color);
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.footer-title {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+    transform: translateX(5px);
+    display: inline-block;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-form .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 100px;
+    padding: 0.75rem 1.25rem;
+    color: white;
+}
+
+.footer-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-form .form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: none;
+}
+
+.footer-form .btn {
+    border-radius: 100px;
+    padding: 0.75rem 1.5rem;
+}
+
+.footer-bottom {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-bottom-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    transition: var(--transition);
+}
+
+.footer-bottom-link:hover {
+    color: var(--accent-color);
+}
+
+@media (max-width: 991.98px) {
+    .footer-main {
+        padding: 3rem 0;
+    }
+}
+</style> 
